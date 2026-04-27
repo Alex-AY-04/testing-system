@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Результат')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container">
+    <!-- Результат показан как модальное окно, открываемое сразу -->
+</div>
+
+<div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Результат теста</h5>
+            </div>
+            <div class="modal-body text-center">
+                <p class="fs-5 mb-3">
+                    Вы ответили правильно на
+                    <strong th:text="${attempt.correctAns}">X</strong>
+                    из <strong th:text="${total}">Y</strong> вопросов.
+                </p>
+                <p class="display-3 mb-0">
+                    Оценка: <span class="badge bg-primary" th:text="${attempt.grade}">Z</span>
+                </p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a href="/student/tests" class="btn btn-primary">Ок</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('resultModal'));
+        modal.show();
+    });
+</script>
+</body>
+</html>
